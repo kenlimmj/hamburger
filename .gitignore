@@ -1,0 +1,23 @@
+# Populated via http://github.com/gitignore/global/OSX.gitignore
+
+._*
+.AppleDouble
+.DS_Store
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+
+# Populated via http://github.com/gitignore/global/SublimeText.gitignore
+
+*.sublime-workspace
+*.sublime-project
+
+# Populated via http://github.com/gitignore/global/Windows.gitignore
+$RECYCLE.BIN/
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+/config/secrets.yml
+
+components
