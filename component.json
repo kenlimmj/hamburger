@@ -1,0 +1,8 @@
+{
+  "name": "hamburger",
+  "version": "1.0.0",
+  "main": ["./css/hamburger.css","./css/hamburger.scss"],
+  "dependencies": {
+    "bourbon": "~3.1.1"
+  }
+}
