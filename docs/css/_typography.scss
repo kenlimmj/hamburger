@@ -1,0 +1,28 @@
+$font-family: 'Source Sans Pro',sans-serif; // Redeclare font-family variable to add our own font-face
+$font-properties: $weight, $line-height, $font-size, $font-family; // Stole this from Typeplate to reinitialize the var
+
+html {
+  @include base-type($font-properties...);    // Also stole this from Typeplate to stuff for the new font
+  -webkit-font-smoothing: antialiased;        // Make fonts look nice and crisp on WebKit
+  -ms-font-smoothing:     antialiased;        // Make things look barely acceptable on I-bloody-E
+  -o-font-smoothing:      antialiased;        // Make fonts look nice and crisp on Opera
+  font-smoothing:         antialiased;        // Prefixless fallback for antialiased font rendering
+  text-rendering:         optimizeLegibility; // What it says, you can read can't you?
+  @include media($mobile) {
+    font-size: 90%; // Chops the font-size by 10% on mobile devices (since we'll be holding stuff closer)
+  }
+  @include media($tablet) {
+    font-size: 95%; // Chops the font-size by 5% on tablet-sized devices so it ain't too yo' mamma
+  }
+}
+
+a {
+  color: #333745;
+  &:hover {
+    color: #EA2E49;
+  }
+}
+
+.text-center {
+  text-align:center;
+}

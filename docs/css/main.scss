@@ -1,6 +1,9 @@
-@import "../../components/normalize-scss/normalize";
+@import "../../components/normalize-scss/normalize";  // Loads Necolas' venerable normalize.css a la mode SCSS
 
-@import "../../components/twoface/scss/twoface";
-@import "../../components/typeplate/scss/typeplate";
-
+//// LIBRARIES ////
+@import "../../components/twoface/scss/twoface";      // Twoface grid layout logic and classes
+@import "../../components/typeplate/scss/typeplate";  // Typeplate mixins, logic and classes
 @import "../../scss/hamburger.scss";
+
+//// OVERRIDES ////
+@import "typography"; // Project-specific font settings. This has to come after Typeplate

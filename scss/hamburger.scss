@@ -1,24 +1,43 @@
-$menu-width: 150px; // User-defined menu width. This is entirely arbitrary
+$menu-width: 200px; // User-defined menu width. This is entirely arbitrary
 $menu-color: #F4F4F4; // User-defined menu color. This is entirely arbitrary
 $trigger-region: 100px; // Size of the region on the side of the screen which triggers the menu on mouseover
-$region-color: white; // Sets the trigger region color. This is normally the background color.
+$region-color: white; // Sets the trigger region color. This is normally the document's background color.
 
 nav {
   float:left; // Docks the menu to the left edge of the screen
   position: fixed; // Prevents the menu from physically occupying space, and keeps it in view even on scroll
   width: $menu-width+$trigger-region; // Sets the width of the menu
+  @include box-sizing(border-box); // Sets border-box sizing so our borders and margins keep within our width
   @include linear-gradient(to right, $menu-color 0%, $menu-color $menu-width/($menu-width+$trigger-region)*100%, $region-color $menu-width/($menu-width+$trigger-region)*100%, $region-color 100%); // Voodoo to add a background color to only the menu part of the nav (and not the region)
+
   height: 100%; // Stretches the menu to the full height of the screen so backgrounds look good
   max-height: 100%; // Prevents the menu from stretching beyond the screen height
   overflow-y: auto; // Allows menu items to scroll within the menu if they get that far
-  @include transition(all 0.2s ease); // Tells the browser to monitor and tween the menu position change
-  @include transform(translateX(-$menu-width)); // Shifts the box off the screen using translate (instead of position) so we avoid repaints
-  @include box-sizing(border-box); // Sets border-box sizing so our borders and margins keep within our width
   -webkit-overflow-scrolling: touch; // Allows touch-friendly scroll interaction for overflow boxes on Safari
 
+  @include transition(all 0.2s ease); // Tells the browser to monitor and tween the menu position change
+  @include transform(translateX(-$menu-width)); // Shifts the box off the screen using translate (instead of position) so we avoid repaints
+
+  & ul {
+    list-style: none; // Prevents fugly list bullets from showing up
+    padding:0;
+    & a {
+      text-decoration: none;
+    }
+    & li {
+      padding-left: 0.5em;
+      padding-top:0.25em;
+      padding-bottom:0.25em;
+    }
+    & li.active {
+      background-color: $region-color;
+    }
+  }
+
   & span {
-    float:right; // Push the menu indicator out to the right
-    padding-right:$trigger-region/2; // Requires work - Must find a way to keep the indicator centered
+    position: absolute;
+    top: 50%; // Pushes the menu indicator down to the center of the page
+    left: $menu-width+10px; // Brings the menu indicator back onscreen with a 10px pad from the screen edge
   }
 
   &:hover {
@@ -31,7 +50,7 @@ nav {
 
     &+main {
       @include transition(all 0.2s ease); // Tells the browser to monitor and tween the menu position change
-      @include transform(translateX(100px)); // Moves the main body content to the right when the menu appears
+      @include transform(translateX($menu-width)); // Moves the main body content to the right when the menu appears
     }
   }
 
