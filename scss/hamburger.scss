@@ -1,7 +1,5 @@
 $menu-width: em(200); // User-defined menu width. This is entirely arbitrary
-$menu-color: #F4F4F4; // User-defined menu color. This is entirely arbitrary
 $trigger-region: em(100); // Size of the region on the side of the screen which triggers the menu on mouseover
-$region-color: white; // Sets the trigger region color. This is normally the document's background color.
 
 nav {
   float:left; // Docks the menu to the left edge of the screen
@@ -12,23 +10,25 @@ nav {
   height: 100%; // Stretches the menu to the full height of the screen so backgrounds look good
   max-height: 100%; // Prevents the menu from stretching beyond the screen height
   overflow-y: auto; // Allows menu items to scroll within the menu if they get that far
-  -webkit-overflow-scrolling: touch; // Allows touch-friendly scroll interaction for overflow boxes on Safari
+  -webkit-overflow-scrolling: touch; // Switches the menu trigger to touch instead of hover on mobile devices
+  -webkit-transform-style: preserve-3d; // Trick to prevent webkit related flickering during CSS animations
   @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the menu position change
   @include transform(translateX(-$menu-width)); // Shifts the box off the screen using translate (instead of position) so we avoid repaints
 
-  & ul {
+  & menu  {
     list-style: none; // Prevents fugly list bullets from showing up
     padding:0;
+
     & a {
-      text-decoration: none;
+      text-decoration: none; // Removes underlines from links because this is supposed to be a menu
     }
     & li {
-      padding-left: 0.5em;
+      padding-left: 1rem;
       padding-top:0.25em;
       padding-bottom:0.25em;
     }
     & li.active {
-      font-weight: bold;
+      font-weight: bold; // Differentiates the active menu item by bolding it
     }
   }
 
@@ -39,10 +39,11 @@ nav {
   }
 
   &:hover {
-    @include transform(translateX(0)); // Moves the menu back into the screen on hover
+    @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
+    @include transform(translateX(0)); // Moves the menu back onto the screen on hover
 
     & span {
-      @include transition(all 300ms linear); // Tells the browser to monitor and fade the menu indicator
+      @include transition(opacity 300ms linear); // Tells the browser to monitor and animate the menu indicator
       opacity: 0; // Sets the opacity of the menu indicator to zero so we get a fade animation
     }
 
@@ -50,11 +51,13 @@ nav {
       @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the menu position change
       @include transform(translateX($menu-width)); // Moves the main body content to the right when the menu appears
       opacity: 0.2;
+
     }
   }
 
   &:not(:hover) {
     &+main {
+      @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
       @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the body content position change
       @include transform(translateX(0)); // Moves the main body content back to the left when the menu hides
     }
