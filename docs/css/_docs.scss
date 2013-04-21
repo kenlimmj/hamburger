@@ -1,0 +1,14 @@
+menu {
+  list-style: none; // Prevents fugly list bullets from showing up
+  & a {
+  text-decoration: none; // Removes underlines from links because this is supposed to be a menu
+  }
+  & li {
+    padding-left: 1rem;
+    padding-top:0.25em;
+    padding-bottom:0.25em;
+  }
+  & li.active {
+    font-weight: bold; // Differentiates the active menu item by bolding it
+  }
+}
