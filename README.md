@@ -92,9 +92,9 @@ All markup should conform to their respective community style guidelines:
 
 ## Code Status
 
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/kenlimmj/hamburger)
-[![Build Status](https://secure.travis-ci.org/jethrokuan/ol2.png)](http://travis-ci.org/kenlimmj/hamburger)
-[![Dependency Status](https://gemnasium.com/jethrokuan/ol2.png)](https://gemnasium.com/kenlimmj/hamburger)
+[![Code Climate](https://codeclimate.com/github/kenlimmj/hamburger.png)](https://codeclimate.com/github/kenlimmj/hamburger)
+[![Build Status](https://secure.travis-ci.org/kenlimmj/hamburger.png)](http://travis-ci.org/kenlimmj/hamburger)
+[![Dependency Status](https://gemnasium.com/kenlimmj/hamburger.png)](https://gemnasium.com/kenlimmj/hamburger)
 
 DISCLAIMER: These nice badge things are provided as-is, because everyone seems to have them. They do not, in any way, reflect the real awesomeness of our code (Yeah right).
 
