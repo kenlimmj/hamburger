@@ -12,7 +12,8 @@ nav {
   overflow-y: auto; // Allows menu items to scroll within the menu if they get that far
   -webkit-overflow-scrolling: touch; // Switches the menu trigger to touch instead of hover on mobile devices
   -webkit-transform-style: preserve-3d; // Trick to prevent webkit related flickering during CSS animations
-  @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the menu position change
+  @include transition(all 500ms ease); // Tells the browser to monitor and tween the menu position change
+  @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
   @include transform(translateX(-$menu-width)); // Shifts the box off the screen using translate (instead of position) so we avoid repaints
 
   & menu  {
@@ -39,6 +40,7 @@ nav {
   }
 
   &:hover {
+    -webkit-transform-style: preserve-3d; // Trick to prevent webkit related flickering during CSS animations
     @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
     @include transform(translateX(0)); // Moves the menu back onto the screen on hover
 
@@ -48,18 +50,15 @@ nav {
     }
 
     &+main {
-      @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the menu position change
+      -webkit-transform-style: preserve-3d; // Trick to prevent webkit related flickering during CSS animations
+      @include transition(all 500ms ease); // Tells the browser to monitor and tween the menu position change
       @include transform(translateX($menu-width)); // Moves the main body content to the right when the menu appears
       opacity: 0.2;
-
     }
   }
 
-  &:not(:hover) {
-    &+main {
-      @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
-      @include transition(all 500ms $ease-out-back); // Tells the browser to monitor and tween the body content position change
-      @include transform(translateX(0)); // Moves the main body content back to the left when the menu hides
-    }
+  &:not(:hover)+main {
+    -webkit-transform-style: preserve-3d; // Trick to prevent webkit related flickering during CSS animations
+    @include transition(all 500ms ease); // Tells the browser to monitor and tween the body content position change
   }
 }
