@@ -1,12 +1,12 @@
-$menu-width: em(200);                     // User-defined menu width. This is entirely arbitrary
-$trigger-region: em(100);                 // Size of the region on the side of the screen which triggers the menu on mouseover
-$debounce: 50ms;                          // Transition debounce time to prevent the menu from spasming in and out on mouseovers
+$menu-width: em(200);                             // User-defined menu width. This is entirely arbitrary
+$trigger-region: em(100);                         // Size of the region on the side of the screen which triggers the menu on mouseover
+$debounce: 50ms;                                  // Transition debounce time to prevent the menu from spasming in and out on mouseovers
 
 nav {
-  float:left;                             // Docks the menu to the left edge of the screen
-  position: fixed;                        // Prevents the menu from physically occupying space, and keeps it in view even on scroll
-  width: $menu-width+$trigger-region;     // Sets the width of the menu
-  @include box-sizing(border-box);        // Sets border-box sizing so our borders and margins keep within our width
+  float:left;                                     // Docks the menu to the left edge of the screen
+  position: fixed;                                // Prevents the menu from physically occupying space, and keeps it in view even on scroll
+  width: $menu-width+$trigger-region;             // Sets the width of the menu
+  @include box-sizing(border-box);                // Sets border-box sizing so our borders and margins keep within our width
 
   height: 100%;                                   // Stretches the menu to the full height of the screen so backgrounds look good
   max-height: 100%;                               // Prevents the menu from stretching beyond the screen height
@@ -16,23 +16,32 @@ nav {
   @include transition(all 500ms ease $debounce);  // Tells the browser to monitor and tween the menu position change
   @include transform(translate3D(0,0,0));         // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
   @include transform(translateX(-$menu-width));   // Shifts the box off the screen using translate (instead of position) so we avoid repaints
+  z-index: 9999;                                  // "Magic Number" to make sure the menu stays on top of everything
 
   & menu  {
-    padding: 0;                           // Chops out the default padding on the menu item
-    margin: 0;                            // Chops out the default margin on the menu item
-    @include transition(all 500ms ease);  // Tells the browser to monitor and tween the menu position change
-    @include transform(scale(0.9));       // Shrinks the menu by a tiny bit to introduce depth
+    padding: 0;                                   // Chops out the default padding on the menu item
+    margin: 0;                                    // Chops out the default margin on the menu item
+    @include transition(all 500ms ease);          // Tells the browser to monitor and tween the menu position change
+    @include transform(scale(0.9));               // Shrinks the menu by a tiny bit to introduce depth
   }
 
-  & span {
+  & .menu {
     position: absolute;
-    top: 50%;                             // Pushes the menu indicator down to the center of the page
-    left: $menu-width+em(10);             // Brings the menu indicator back onscreen with a 10px pad from the screen edge
+    left: $menu-width+em(10);                     // Brings the menu indicator back onscreen with a slight pad from the screen edge
+    @include media($computer) {
+      top: 50%;                                   // Pushes the menu indicator down to the center of the page
+    }
+    @include media($tablet) {
+      top: 50%;                                   // Pushes the menu indicator down to the center of the page
+    }
+    @include media($mobile) {
+      top: 1rem;                                  // Brings the menu indicator back up to the top on mobile screen sizes
+    }
   }
 
   &:hover {
-    -webkit-transform-style: preserve-3d;   // Trick to prevent webkit related flickering during CSS animations
-    @include transform(translate3D(0,0,0)); // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
+    -webkit-transform-style: preserve-3d;         // Trick to prevent webkit related flickering during CSS animations
+    @include transform(translate3D(0,0,0));       // Hack to trigger the system GPU (if any) to assist and smoothen the 2D transform
 
     & menu {
       @include transition(all 500ms ease $debounce);  // Tells the browser to monitor and tween the menu position change
@@ -42,14 +51,15 @@ nav {
 
     & span {
       @include transition(opacity 300ms linear $debounce); // Tells the browser to monitor and animate the menu indicator
-      opacity: 0;                                           // Sets the opacity of the menu indicator to zero so we get a fade animation
+      opacity: 0;                                          // Sets the opacity of the menu indicator to zero so we get a fade animation
     }
 
     &+main {
       -webkit-transform-style: preserve-3d;           // Trick to prevent webkit related flickering during CSS animations
       @include transition(all 500ms ease $debounce);  // Tells the browser to monitor and tween the menu position change
       @include transform(translateX($menu-width));    // Moves the main body content to the right when the menu appears
-      opacity: 0.2;                                   // Fades out the main body so it doesn't distract the user from the menu
+      opacity: 0.1;                                   // Fades out the main body so it doesn't distract the user from the menu
+      @include transform(scale(0.9));                 // Shrinks the size of the main body so we get a sense of depth
     }
   }
 

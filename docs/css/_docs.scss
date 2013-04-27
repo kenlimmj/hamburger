@@ -1,14 +1,56 @@
 menu {
-  list-style: none; // Prevents fugly list bullets from showing up
+  list-style: none;                           // Prevents fugly list bullets from showing up
   & a {
-  text-decoration: none; // Removes underlines from links because this is supposed to be a menu
+  text-decoration: none;                      // Removes underlines from links because this is supposed to be a menu
   }
   & li {
-    padding-left: 1rem;
-    padding-top:0.25em;
-    padding-bottom:0.25em;
+    padding-left: 1rem;                       // Prevents the list items from sticking to the left edge of the screen
+    padding-top:0.25em;                       // Spaces out the top of the list items
+    padding-bottom:0.25em;                    // Spaces out the bottom of the list items
   }
   & li.active {
-    font-weight: bold; // Differentiates the active menu item by bolding it
+    font-weight: bold;                        // Differentiates the active menu item by bolding it
+  }
+  & h1 {
+    padding-left: 1rem;                       // Pads the menu header so it matches up with the lists
+  }
+}
+
+.push-golden {
+  @include media($mobile) {
+    @include pad(1em 0 0 0);                  // Pushes content down, albeit without the artistic ratio
+  }
+  @include media($tablet) {
+    @include pad($column/1.618 0 0 0);        // Pushes content down, albeit without the artistic ratio :(
+  }
+  @include media($computer) {
+    @include pad($column/1.618 0 0 0);        // Pushes content down by an artistically-mandated ratio
+  }
+  @include media($tv) {
+    @include pad($column/1.618 0 0 0);        // Pushes content down by an artistically-mandated ratio
+  }
+}
+
+@include media($mobile) {
+  header {
+    position: fixed;                          // Sticks the header to the top when scrolling on mobile devices
+    background-color: rgba(255,255,255,0.5);  // Adds a white background that is semi-transparent
+    text-align: center;                       // Centers the text to give it a topbar kind of look
+    & h1 {
+      font-size: 2em;                         // Decreases the title font-size on mobile so it doesn't get so fat
+    }
+    & h5 {
+      font-size: 1em;                         // Decreases the sub-header font-size on mobile so it doesn't get so fat
+    }
+    & + section {
+      padding-top: 5em;                       // Pushes down the first section because position:fixed does stupid things to spacing
+    }
+  }
+}
+
+.hidden-mobile {
+  display: inline-block;
+  @include media($mobile) {
+    display: none;
   }
 }
