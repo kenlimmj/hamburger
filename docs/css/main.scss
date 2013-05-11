@@ -3,7 +3,8 @@
 //// LIBRARIES ////
 @import "../../components/twoface/scss/twoface";      // Twoface grid layout logic and classes
 @import "../../components/typeplate/scss/typeplate";  // Typeplate mixins, logic and classes
-@import "../../scss/hamburger.scss";                  // Delish beef patty, crispy lettuce and two sesame seed buns
+@import "../../scss/hamburger-settings";              // Settings for hamburger
+@import "../../scss/hamburger";                       // Delish beef patty, crispy lettuce and two sesame seed buns
 
 //// OVERRIDES ////
 @import "docs";                                       // Theming styles for the documentation

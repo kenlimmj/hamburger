@@ -1,0 +1,4 @@
+$menu-width: em(200);                             // User-defined menu width. This is entirely arbitrary
+$trigger-region: em(100);                         // Size of the region on the side of the screen which triggers the menu on mouseover
+$debounce: 50ms;                                  // Transition debounce time to prevent the menu from spasming in and out on mouseovers
+$timing: 500ms;
