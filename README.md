@@ -2,10 +2,6 @@
 
 A CSS-only implementation of the layered slide-in UI menu concept popularized by Facebook, Google and Mailbox. Inspired by Hakim's [Meny](https://github.com/hakimel/meny) and powered by CSS3.
 
-## Introduction
-
-Verethragna manages and displays lectures in accordance with openlectures production guidelines and specifications. The database is bidirectionally synchronized to Google Drive. Subsequent updates will allow advanced user-tracking and extensive third-party API integration
-
 ## Quick Start
 
 Hamburger is registered on [Bower](https://github.com/twitter/bower). To install via Bower:
